@@ -3,17 +3,18 @@ Particle[] regenald;
 
 void setup()
 {
-    size(800,800);
-  regenald = new Particle[10000];
-  //regenald[] = new OddballParticle();
+	size(800,800);
+  regenald = new Particle[12000];
   for(int i=0; i<regenald.length; i++)
   {
     regenald[i] = new NormalParticle();
   }
+  regenald[0] = new OddballParticle();
+  regenald[1] = new JumboParticle();
 }
 void draw()
 {
-    fill(0,1000);
+	fill(0,10);
   rect(0,0,width,height);
   noStroke();
   for(int i=0; i<regenald.length; i++)
@@ -31,14 +32,15 @@ class NormalParticle implements Particle
   {
   myX=myY=400;
   myAngle = Math.random()*2*Math.PI;
-  mySpeed = Math.random()*10;
-  myColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
+  mySpeed = Math.random()*5;
+  myColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
   }
   void move()
    {
-     myX=myX+Math.cos(myAngle)*mySpeed;
+     myX=myX+Math.cos(myAngle)/mySpeed;
      myY=myY+Math.sin(myAngle)*mySpeed;
-     myAngle=myAngle+0.01;
+     myAngle=myAngle-0.01;
+     mySpeed=mySpeed+0.01;
    }
    void show()
    {
@@ -49,17 +51,36 @@ class NormalParticle implements Particle
 }
 interface Particle
 {
-    public void show();
+	public void show();
   public void move();
 }
-//class OddballParticle implements Particle//uses an interface
-
-class JumboParticle extends NormalParticle //uses inheritance
+class OddballParticle implements Particle//uses an interface
 {
-    public void show()
+  int startX, startY, myColor;
+  OddballParticle()
   {
+  startX=startY=400;
+  myColor = color(188,58,7);
   }
   public void move()
-  {
-  }
+   {
+     startX=startX+(int)(Math.random()*10);
+   }
+   public void show()
+   {
+     fill(myColor);
+     rect(startX,startY,100,100);
+   }
+}
+class JumboParticle extends NormalParticle //uses inheritance
+{
+  void move()
+   {
+     myY=myY+(int)(Math.random()*10);
+   }
+   void show()
+   {
+     fill(myColor);
+     ellipse(400,(float)myY,50,50);
+   }
 }
