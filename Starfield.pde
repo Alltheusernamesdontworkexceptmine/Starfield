@@ -40,7 +40,6 @@ class NormalParticle implements Particle
      myX=myX+Math.cos(myAngle)/mySpeed;
      myY=myY+Math.sin(myAngle)*mySpeed;
      myAngle=myAngle-0.01;
-     mySpeed=mySpeed+0.01;
    }
    void show()
    {
