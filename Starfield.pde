@@ -1,10 +1,8 @@
 Particle[] regenald;
-
-
 void setup()
 {
-	size(800,800);
-  regenald = new Particle[9000];
+  size(800,800);
+  regenald = new Particle[7000];
   for(int i=0; i<regenald.length; i++)
   {
     regenald[i] = new NormalParticle();
@@ -14,7 +12,7 @@ void setup()
 }
 void draw()
 {
-	fill(0,10);
+  fill(0,10);
   rect(0,0,width,height);
   noStroke();
   for(int i=0; i<regenald.length; i++)
@@ -26,7 +24,7 @@ void draw()
 }
 class NormalParticle implements Particle
 {
-  double myX,myY,myAngle,mySpeed;
+  double myX,myY,myAngle,mySpeed,myH;
   int myColor;
   NormalParticle()
   {
@@ -37,9 +35,10 @@ class NormalParticle implements Particle
   }
   void move()
    {
-     myX=myX+Math.cos(myAngle)/mySpeed;
-     myY=myY+Math.sin(myAngle)*mySpeed;
-     myAngle=myAngle-0.01;
+     myX=myX+Math.cos(myAngle)%mySpeed;
+     myY=myY+Math.sin(myAngle)%mySpeed;
+     myAngle=myAngle+0.01;
+     mySpeed=mySpeed+0.01;
    }
    void show()
    {
@@ -50,7 +49,7 @@ class NormalParticle implements Particle
 }
 interface Particle
 {
-	public void show();
+  public void show();
   public void move();
 }
 class OddballParticle implements Particle//uses an interface
