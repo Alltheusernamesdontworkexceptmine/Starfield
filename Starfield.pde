@@ -2,7 +2,7 @@ Particle[] regenald;
 void setup()
 {
   size(800,800);
-  regenald = new Particle[2000];
+  regenald = new Particle[2500];
   for(int i=0; i<regenald.length; i++)
   {
     regenald[i] = new NormalParticle();
